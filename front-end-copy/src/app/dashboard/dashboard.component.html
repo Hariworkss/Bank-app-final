@@ -1,0 +1,270 @@
+<!-- navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand text-white d-flex" >
+        <img  src="https://media.istockphoto.com/id/538788248/vector/bank-icon-on-white-round-vector-button.jpg?s=170667a&w=0&k=20&c=UhMpZlkubFY8Mj8tFzSUfpkJ-A3lJvUSDr_BM1x_9S4=" alt="" width="30" height="24" class="d-inline-block align-text-top bankicon ms-3">
+        <h4 class="ms-2 mt-1">SBC BANK</h4> 
+      </a>    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse ms-auto" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Services
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a (click)="getBalance()" class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample">Balance Enquiry</a>
+            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Fund Transfer</a>
+            <a class="dropdown-item" routerLink="/transaction">Transaction History</a>
+            <a (click)="deleteAccount()" class="dropdown-item">Remove Account</a>
+            <a (click)="logout()" class="dropdown-item" >SignOut</a>
+
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- offcanvas balance enquiry -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <img class="canvasbalimg " src="https://img.freepik.com/free-vector/banknote-concept-illustration_114360-5611.jpg?w=740&t=st=1681727783~exp=1681728383~hmac=499ebd6ee62edcfd60a965794eac1456bf4f402e6ca42abe923ea40a4498c2a3" alt="">
+    <div class="pt-4">
+      <h3>Hi {{user}}</h3>
+      <h5>Your current Balance is</h5>
+      <span class="text-success">{{balance}}</span>
+    </div>
+    
+    </div>
+  </div>
+
+  <div *ngIf="logoutStatus"  class="pt-3">
+    <h2 class="text-center">Please wait... <br>
+    While you are logging out
+    </h2>
+  </div>
+
+  <div *ngIf="!logoutStatus"  >
+    <div *ngIf="!deleteConfirmStatus"  >
+      <marquee  direction="left" class="w-100 bg-dark text-white font pt-1" [height]="30" scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+        !!! Important : Fixed deposit interest rate is raised upto 7.5%
+      </marquee>
+    </div>
+  </div>
+  
+  
+
+  <app-delete-account (onCancel)="cancelDelete()" (onDelete)="deleteFromParent()" [deleteAcno]="acno" ></app-delete-account>
+
+  <!-- main content -->
+  <div *ngIf="deleteSuccessMsg">
+    <h1 class="text-center text-danger">{{deleteSuccessMsg}}</h1>
+  </div>
+
+
+  <div class="container" *ngIf="!deleteConfirmStatus" >
+    <div class="row" *ngIf="!deleteSuccessMsg">
+        <div class="col-6 pt-5 pe-5">
+            <!-- content -->
+            <h1 class="mt-5">Welcome {{user}}</h1>
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt veritatis tenetur, mollitia ratione impedit ut ullam id atque vero tempora!</p>
+            <!-- toggle data -->
+            <div class="collapse" id="collapseExample">
+                <div  class="card card-body">
+                   <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. At totam praesentium reprehenderit repellendus sed quod voluptatem inventore beatae sequi veniam nisi illo fuga, similique assumenda!
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti pariatur, fugiat tempore dolor ducimus provident. Id veritatis adipisci sunt ut.
+                  </p>
+                 </div>
+              </div>
+            <button (click)="collapse()" data-bs-toggle="collapse" data-bs-target="#collapseExample"  class="btn btn-success">Read 
+              <span *ngIf="isCollapse">More</span> 
+              <span *ngIf="!isCollapse">Less</span>
+            </button>
+        </div>
+        <div class="col-6 pt-3">
+            <!-- image -->
+            <img width="600px" class="" src="https://img.freepik.com/free-vector/online-banking-concept-illustration_114360-12875.jpg?w=900&t=st=1681385978~exp=1681386578~hmac=50f9da74ff98716c2adcda45df3943ce450c7c605a0e10e8ee46723c5f979d94" alt="">
+        </div>
+    </div>
+  </div>
+
+  <!-- modal funs transfer -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-center">
+            <img class="w-75 " src="https://i.postimg.cc/BvnvBp5F/18352169-5989813-removebg-preview.png" alt="">
+          </div>
+          <form [formGroup]="fundForm">
+            <div class="form-floating mb-3">
+              <input type="text" name="creditacc" formControlName="creditacc" class="form-control" id="floatingInput" placeholder="Credit Account">
+              <label for="floatingInput">Credit Account</label>
+              <div *ngIf="this.fundForm.get('creditacc')?.errors && this.fundForm.get('creditacc')?.touched" class="text-danger">Invalid  Account Number</div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" name="amount" formControlName="amount" class="form-control" id="floatingamount" placeholder="amount">
+              <label for="floatingamount">Amount</label>
+              <div *ngIf="this.fundForm.get('amount')?.errors && this.fundForm.get('amount')?.touched" class="text-danger">Invalid Data</div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" name="password" formControlName="password" class="form-control" id="floatingpassword" placeholder="password">
+              <label for="floatingpassword">Profile Password</label>
+              <div *ngIf="this.fundForm.get('password')?.errors && this.fundForm.get('password')?.touched" class="text-danger">Invalid Password</div>
+
+            </div>
+          </form>
+        </div>
+        <div class="text-success text-center mb-3">
+            {{fundTransferSuccessMsg}}
+        </div>
+        <div class="text-danger text-center mb-3">
+          {{fundTransferErrorMsg}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto ms-2" data-bs-dismiss="modal">Close</button>
+          <button (click)="resetForm()" type="button" class="btn btn-dark ">Reset</button>
+          <button (click)="fundTransfer()" type="button" class="btn btn-success ms-3">Transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Footer -->
+<footer *ngIf="!deleteConfirmStatus"  class="text-center text-lg-start bg-white text-muted">
+    <!-- Section: Social media -->
+    <section *ngIf="!deleteSuccessMsg" class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3 text-secondary"></i>Company name
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer content. Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Products
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Angular</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">React</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Vue</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Laravel</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">Pricing</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Settings</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Orders</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Help</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+            <p>
+              <i class="fas fa-envelope me-3 text-secondary"></i>
+              info@example.com
+            </p>
+            <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->

@@ -1,0 +1,51 @@
+
+<!-- navbar -->
+<nav class="navbar navbar-light ">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white d-flex" href="#">
+        <img  src="https://media.istockphoto.com/id/538788248/vector/bank-icon-on-white-round-vector-button.jpg?s=170667a&w=0&k=20&c=UhMpZlkubFY8Mj8tFzSUfpkJ-A3lJvUSDr_BM1x_9S4=" alt="" width="30" height="24" class="d-inline-block align-text-top bankicon ms-3">
+        <h4 class="ms-2 mt-1">SBC BANK</h4> 
+      </a>
+    </div>
+  </nav>
+  <!-- main content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-center p-5">
+            <!-- image -->
+            <img class="w-75" src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?w=740&t=st=1680512141~exp=1680512741~hmac=d16ff0e262f4d828ba27b724000c2ac7d45e55c01bcdd26b5a6737541c8524e3" alt="">
+        </div>
+        <div class="col-md-6 colright">
+            <!-- form content -->
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="border border-2 mt-5 p-5">
+                <h1 class="text-center mb-4" style="color: rgb(4, 57, 30);"> Login Here</h1>
+                <div class="form-floating mb-3">
+                    <input type="text" name="acno" formControlName="acno"  class="form-control" id="floatingInput" placeholder="Account Number">
+                    <div *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched" class="text-danger">Invalid Account Number</div>
+
+                    <label for="floatingInput">Account Number</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" name="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <div *ngIf="this.loginForm.get('password')?.errors && this.loginForm.get('password')?.touched" class="text-danger">Invalid Account Number</div>
+
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <!-- login error message -->
+                  <div class="text-danger fw-bold">
+                    {{loginErrorMsg}}
+                  </div>
+                  <!-- button -->
+                  <button type="submit" class="buttonlog btn">
+                    Sign In
+                    <!-- spinner -->
+                    <div *ngIf="logSuccessMsg" class="spinner-border" role="status">
+                      <span class="sr-only spinnersize">Loading...</span>
+                    </div>
+                  </button>
+                  <a routerLink="register" style="float: right; margin-top: 20px; text-decoration: none;">New here ? Please Sign Up</a>
+            </form>
+        </div>
+    </div>
+</div>

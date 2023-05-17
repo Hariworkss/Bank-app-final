@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&family=Noto+Sans&family=Patua+One&family=Poppins:wght@300&family=Roboto:wght@100&family=Rubik:wght@300&family=Sniglet&family=Source+Sans+Pro:wght@200&display=swap');
+
+body{
+    font-family: 'Noto Sans', sans-serif;
+
+}
