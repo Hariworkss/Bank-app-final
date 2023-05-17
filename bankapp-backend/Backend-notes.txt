@@ -1,0 +1,55 @@
+
+                BACKEND FOR BANK APP
+            ----------------------------    
+           NODE JS + EXPRESS JS + MONGODB
+        -----------------------------------
+
+ BASIC STEPS
+ -------------
+  1.Creation of package.json file - npm init or npm init -y  
+  2.Create index.js file
+  3.Install Express - npm i express or npm install express   
+  4.import express in index.js - const expresss = require("express") 
+  5.create a server using express - const server=express() 
+  6.3 setup port server  
+      server.listen(5000,()=>{
+        console.log("Listening on the port")
+        }) 
+  7. check by running file - node index.js      
+  8. install cors (cross origin resource sharing)- npm i cors - to share data with di/ft port numbers
+  9. import in index.js - const cors=require("cors");
+  10. use course in server app- 
+        server.use(cors({
+        origin:"http://localhost:4200"
+        }))  
+11. Parse json data to the js in server app - use express.json()
+12.To resolve client requests - get,put,post,delete
+13.Create DB and collection in MONGODB
+14.Database connection with NODEJS server - mongoose(library)
+15 install mongoose - npm i mongoose
+16 Create a folder services inside >bankapp-backend
+17 create a file db.js and logic.js
+18. In >db.js
+        1.import mongoose
+        2.define connection string between express and MONGODB
+        3.create a model and schema for storing data into the database
+        4.export the collection
+19.Logic to resolve the client requests - create a new file in services - logic.js
+    In >logic.js 
+       - create an arrow function for register and export it.        
+
+20. login integration
+        1.create a logic for login - login()
+        2.login server api call
+        3.testing in postman ok ? front end login service
+
+21. Balance Enquiry              
+        Authorization - 
+        JsonWebToken - JWT Token Install - npm i jsonwebtoken
+
+        1)Generate a Token - sign()
+        Using jwttoken, generate Token for user who logged in successfull.
+
+        logic = login successfull+sign
+
+        
